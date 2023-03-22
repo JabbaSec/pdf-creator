@@ -2,17 +2,14 @@
 <head>
     <script src="./html2pdf.bundle.min.js.map"></script>
     <script src="./html2canvas.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <link rel="stylesheet" href="../templates/styles.css">
 </head>
 
 <body>
-    <label for="pageSelect">Select a page:</label>
     <select id="pageSelect">
-        <option value="../templates/invoice.html">Invoice</option>
-        <option value="../templates/receipt.html">Receipt</option>
-        <option value="../templates/report.html">Report</option>
+        <option value="../templates/template1.html">Template 1</option>
+        <option value="../templates/template2.html">Template 2</option>
     </select>
     
     <button id="generate">Create PDF</button>
@@ -29,6 +26,7 @@
         </div>
     </section>
     
-    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="script.js"></script>    
 </body>
 </html>
