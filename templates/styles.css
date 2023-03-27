@@ -78,6 +78,17 @@ hr{
 	color: rgba(0,0,0, 0.70);
 	font-weight: 400;
 }
+.invoice-bottom .service-price-title{
+	font-size: 16px;
+	text-align: center;
+}
+.invoice-bottom .service-price-subtitle{
+	font-size: 12px;
+	color: rgba(0,0,0, 0.70);
+	font-weight: 400;
+	text-align: center;
+}
+
 .invoice-bottom .service-price{
 	font-size: 16px;
 	color: rgba(0, 200, 83, 0.55);
