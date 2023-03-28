@@ -7,7 +7,6 @@
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="styles.css">
 	
 </head>
 <body>
@@ -67,20 +66,53 @@
 		<hr>
 		<div class="row">
 			<div class="col-sm-6">
-				<h2 id="planTitle" class="service-title">Basic Yearly USD</h2>
-				<h5 id="planDescription" class="service-subtitle">USD Monthly</h5>
+				<h2 class="service-title">Basic Yearly USD</h2>
 			</div>
 			<div class="col-sm-2">
 				<h3 class="service-price-title">Units</h3>
-				<h5 class="service-price-subtitle">1</h5>
+				<h5 id="units" class="service-price-subtitle">5</h5>
 			</div>
 			<div class="col-sm-2">
 				<h3 class="service-price-title">Unit Price</h3>
-				<h5 class="service-price-subtitle">$480.00</h5>
+				<h5 id="unitPrice" class="service-price-subtitle">$480.00</h5>
 			</div>
 			<div class="col-sm-2">
-				<h3 id="planPrice" class="service-price-title">Amount</h3>
-				<h5 class="service-price-subtitle">$480.00</h5>
+				<h3 class="service-price-title">Total</h3>
+				<h5 id="unitTotal" class="service-price-subtitle">$480.00</h5>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-8">
+				<h2 class="service-title">Without VAT</h2>
+				<h5 class="service-subtitle">Each item not including VAT</h5>
+			</div>
+			<div class="col-sm-2">
+				<h3 class="service-price-title">Unit Price</h3>
+				<h5 id="unitNoVAT" class="service-price-subtitle">$480.00</h5>
+			</div>
+			<div class="col-sm-2">
+				<h3 class="service-price-title">Total</h3>
+				<h5 id="totalNoVAT" class="service-price-subtitle">$480.00</h5>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-6">
+				<h2 class="service-title">VAT Breakdown</h2>
+				<h5 class="service-subtitle">VAT charged on each item</h5>
+			</div>
+			<div class="col-sm-2">
+				<h3 class="service-price-title">VAT</h3>
+				<h5 class="service-price-subtitle">20%</h5>
+			</div>
+			<div class="col-sm-2">
+				<h3 class="service-price-title">Unit VAT</h3>
+				<h5 id="unitVAT" class="service-price-subtitle">$480.00</h5>
+			</div>
+			<div class="col-sm-2">
+				<h3 class="service-price-title">Total VAT</h3>
+				<h5 id="totalVAT" class="service-price-subtitle">$480.00</h5>
 			</div>
 		</div>
 		<hr>
@@ -96,7 +128,7 @@
 				<h4 class="discount">AMOUNT PAID</h4>
 			</div>
 			<div class="col-sm-2 col-xs-4">
-				<h3 id="amountPaid" class="discount-price">-$480.00</h3>
+				<h3 id="paid" class="discount-price">-$480.00</h3>
 			</div>
 			<div class="clearfix"></div>
 			<div class="col-sm-9 col-xs-8">
@@ -109,32 +141,51 @@
 	</div>
 	
 	<script>
-		var planTitle = document.getElementById("planTitle")
-		var planDescription = document.getElementById("planDescription")
-		var planPrice = document.getElementById("planPrice")
-		var subtotal = document.getElementById("subtotal")
-		var amountPaid = document.getElementById("amountPaid")
-		var subscriptionSelected = document.getElementById("subscriptionSelect")
-		
-		subscriptionSelected.addEventListener("change", updateSubscription)
-		
-		function updateSubscription() {
-			if (subscriptionSelected.value == "monthly") {
-				planTitle.innerHTML = "Monthly"
-				planDescription.innerHTML = "Monthly USD"
-				planPrice.innerHTML = "$10.00"
-				subtotal.innerHTML = "$10.00"
-				amountPaid.innerHTML = "$10.00"
-			}
-			
-			if (subscriptionSelected.value == "annual") {
-				planTitle.innerHTML = "Annual"
-				planDescription.innerHTML = "Annual USD"
-				planPrice.innerHTML = "$90.00"
-				subtotal.innerHTML = "$90.00"
-				amountPaid.innerHTML = "$90.00"
-			}
-		}
+const unitsElement = document.getElementById('units');
+const unitTotalElement = document.getElementById('unitTotal');
+
+const unitVATElement = document.getElementById('unitVAT');
+const totalVATElement = document.getElementById('totalVAT');
+
+const unitNoVATElement = document.getElementById('unitNoVAT');
+const totalNoVATElement = document.getElementById('totalNoVAT');
+
+const subtotalElement = document.getElementById('subtotal');
+const paidElement = document.getElementById('paid');
+
+const unitPriceElement = document.getElementById('unitPrice');
+const pricePerUnit = parseFloat(unitPriceElement.innerText.replace(/\$/g, ''));
+
+function updateUnitTotal() {
+  const units = parseInt(unitsElement.innerText.trim());
+  if (isNaN(units)) {
+    return;
+  }
+  const unitTotal = units * pricePerUnit;
+
+  const unitVAT = pricePerUnit * 0.2;
+  const totalVAT = unitTotal * 0.2;
+
+  const unitNoVAT = pricePerUnit * 0.8;
+  const totalNoVAT = unitTotal * 0.8;
+
+  unitTotalElement.innerText = `$${unitTotal.toFixed(2)}`;
+
+  unitNoVATElement.innerText = `$${unitNoVAT.toFixed(2)}`;
+  totalNoVATElement.innerText = `$${totalNoVAT.toFixed(2)}`;
+
+  unitVATElement.innerText = `$${unitVAT.toFixed(2)}`;
+  totalVATElement.innerText = `$${totalVAT.toFixed(2)}`;
+
+  subtotalElement.innerText = `$${unitTotal.toFixed(2)}`;
+  paidElement.innerText = `- $${unitTotal.toFixed(2)}`;
+}
+
+updateUnitTotal();
+
+const updateButton = document.getElementById('updateButton');
+updateButton.addEventListener('click', updateUnitTotal);
+
 	</script>
 </body>
 </html>

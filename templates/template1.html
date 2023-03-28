@@ -92,7 +92,7 @@
 				<h3 class="total-due">TOTAL DUE</h3>
 			</div>
 			<div class="col-sm-3 col-xs-4">
-				<h3 class="total-due-price">$0.00</h3>
+				<h3 id="totalDue" class="total-due-price">$0.00</h3>
 			</div>
 		</div>
 	</div>
@@ -104,6 +104,7 @@
 		var subtotal = document.getElementById("subtotal")
 		var amountPaid = document.getElementById("amountPaid")
 		var subscriptionSelected = document.getElementById("subscriptionSelect")
+		var totalDue = document.getElementById("totalDue")
 		
 		subscriptionSelected.addEventListener("change", updateSubscription)
 		
